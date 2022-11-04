@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="./assets/images/favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./scss/main.scss">
+    <title>Les petits plats</title>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="text-center">
+              <img src="./assets/images/logo.svg" alt="Les petits plats" class="img-fluid">
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <form method="get" id="main-search" role="search">
+              <fieldset class="main-search--wrapper">
+                <label class="visually-hidden" for="main-search-input">Rechercher une recette</label>
+                <input type="search" placeholder="Rechercher une recette" name="main-search-input" id="main-search-input">
+                <input type="submit" value="Rechercher">
+              </fieldset>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="secondary-filters mt-4">
+              <div class="tags mt-4">
+                <!-- TODO: render tag creation through a factory function -->
+                <div class="tag tag-primary">
+                  <span class="label">Riz blanc</span>
+                  <button class="delete" aria-label="Supprimer le tag"></button>
+                </div>
+                <div class="tag tag-secondary">
+                  <span class="label">Riz blanc</span>
+                  <button class="delete" aria-label="Supprimer le tag"></button>
+                </div>
+                <div class="tag tag-tertiary">
+                  <span class="label">Riz blanc</span>
+                  <button class="delete" aria-label="Supprimer le tag"></button>
+                </div>
+              </div>
+
+              <div class="secondary-filters--wrapper d-inline-flex mt-3">
+                <div class="dropdown">
+                  <button type="button" 
+                    class="btn btn-primary text-light py-3 dropdown-toggle text-start" 
+                    data-bs-auto-close="outside" 
+                    data-identifier="ingredients" 
+                    data-bs-toggle="dropdown" 
+                    aria-expanded="false" 
+                    data-bs-offset="0,0">
+                    Ingrédients
+                  </button>
+                  <div class="dropdown-menu text-bg-primary text-light">
+                    <div class="container">
+                      <div class="row flex-nowrap items-columns">
+                        <div class="col-md-4 items-list">
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                        </div>
+                        <div class="col-md-4 items-list">
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                        </div>
+                        <div class="col-md-4 items-list">
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="dropdown">
+                  <button type="button" 
+                    class="btn btn-secondary text-light py-3 dropdown-toggle text-start" 
+                    data-bs-auto-close="outside" 
+                    data-identifier="appliance" 
+                    data-bs-toggle="dropdown" 
+                    aria-expanded="false" 
+                    data-bs-offset="0,0">
+                    Appareils
+                  </button>
+                  <div class="dropdown-menu text-bg-secondary text-light">
+                    <div class="container">
+                      <div class="row flex-nowrap items-columns">
+                        <div class="col-md-4 items-list">
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                        </div>
+                        <div class="col-md-4 items-list">
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                        </div>
+                        <div class="col-md-4 items-list">
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="dropdown">
+                  <button type="button" 
+                    class="btn btn-tertiary text-light py-3 dropdown-toggle text-start" 
+                    data-bs-auto-close="outside" 
+                    data-identifier="ustensils" 
+                    data-bs-toggle="dropdown" 
+                    aria-expanded="false" 
+                    data-bs-offset="0,0">
+                    Ustensiles
+                  </button>
+                  <div class="dropdown-menu text-bg-tertiary text-light">
+                    <div class="container">
+                      <div class="row flex-nowrap items-columns">
+                        <div class="col-md-4 items-list">
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                        </div>
+                        <div class="col-md-4 items-list">
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                        </div>
+                        <div class="col-md-4 items-list">
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                          <button class="item">Riz blanc</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="recipes-listing mt-4">
+
+          <article class="card">
+            <picture>
+              <img src="./assets/images/recipe.png" class="card-img-top" alt="Poisson cru">
+            </picture>
+            <div class="card-body">
+              <header class="row">
+                <h2 class="card-title">Poisson Cru à la tahitienne</h2>
+                <div class="card-time">60 min</div>
+              </header>
+              <div class="row mt-3">
+                <div class="col-6">
+                  <ul class="card-ingredients">
+                    <li><strong>Thon Rouge (ou blanc) :</strong> 200g</li>
+                    <li><strong>Concombre :</strong> 1</li>
+                    <li><strong>Tomate :</strong> 2</li>
+                    <li><strong>Carotte :</strong> 1</li>
+                    <li><strong>Citron Vert :</strong> 5</li>
+                    <li><strong>Lait de coco :</strong> 100 ml</li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">Découper le thon en dés, mettre dans un plat et recouvrir de jus de citron vert (mieux vaut prendre un plat large et peu profond). Laisser reposer au réfrigérateur au moins 2...</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <picture>
+              <img src="./assets/images/recipe.png" class="card-img-top" alt="Poisson cru">
+            </picture>
+            <div class="card-body">
+              <header class="row">
+                <h2 class="card-title">Poisson Cru à la tahitienne</h2>
+                <div class="card-time">60 min</div>
+              </header>
+              <div class="row mt-3">
+                <div class="col-6">
+                  <ul class="card-ingredients">
+                    <li><strong>Thon Rouge (ou blanc) :</strong> 200g</li>
+                    <li><strong>Concombre :</strong> 1</li>
+                    <li><strong>Tomate :</strong> 2</li>
+                    <li><strong>Carotte :</strong> 1</li>
+                    <li><strong>Citron Vert :</strong> 5</li>
+                    <li><strong>Lait de coco :</strong> 100 ml</li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">Découper le thon en dés, mettre dans un plat et recouvrir de jus de citron vert (mieux vaut prendre un plat large et peu profond). Laisser reposer au réfrigérateur au moins 2...</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <picture>
+              <img src="./assets/images/recipe.png" class="card-img-top" alt="Poisson cru">
+            </picture>
+            <div class="card-body">
+              <header class="row">
+                <h2 class="card-title">Poisson Cru à la tahitienne</h2>
+                <div class="card-time">60 min</div>
+              </header>
+              <div class="row mt-3">
+                <div class="col-6">
+                  <ul class="card-ingredients">
+                    <li><strong>Thon Rouge (ou blanc) :</strong> 200g</li>
+                    <li><strong>Concombre :</strong> 1</li>
+                    <li><strong>Tomate :</strong> 2</li>
+                    <li><strong>Carotte :</strong> 1</li>
+                    <li><strong>Citron Vert :</strong> 5</li>
+                    <li><strong>Lait de coco :</strong> 100 ml</li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">Découper le thon en dés, mettre dans un plat et recouvrir de jus de citron vert (mieux vaut prendre un plat large et peu profond). Laisser reposer au réfrigérateur au moins 2...</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <picture>
+              <img src="./assets/images/recipe.png" class="card-img-top" alt="Poisson cru">
+            </picture>
+            <div class="card-body">
+              <header class="row">
+                <h2 class="card-title">Poisson Cru à la tahitienne</h2>
+                <div class="card-time">60 min</div>
+              </header>
+              <div class="row mt-3">
+                <div class="col-6">
+                  <ul class="card-ingredients">
+                    <li><strong>Thon Rouge (ou blanc) :</strong> 200g</li>
+                    <li><strong>Concombre :</strong> 1</li>
+                    <li><strong>Tomate :</strong> 2</li>
+                    <li><strong>Carotte :</strong> 1</li>
+                    <li><strong>Citron Vert :</strong> 5</li>
+                    <li><strong>Lait de coco :</strong> 100 ml</li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">Découper le thon en dés, mettre dans un plat et recouvrir de jus de citron vert (mieux vaut prendre un plat large et peu profond). Laisser reposer au réfrigérateur au moins 2...</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <picture>
+              <img src="./assets/images/recipe.png" class="card-img-top" alt="Poisson cru">
+            </picture>
+            <div class="card-body">
+              <header class="row">
+                <h2 class="card-title">Poisson Cru à la tahitienne</h2>
+                <div class="card-time">60 min</div>
+              </header>
+              <div class="row mt-3">
+                <div class="col-6">
+                  <ul class="card-ingredients">
+                    <li><strong>Thon Rouge (ou blanc) :</strong> 200g</li>
+                    <li><strong>Concombre :</strong> 1</li>
+                    <li><strong>Tomate :</strong> 2</li>
+                    <li><strong>Carotte :</strong> 1</li>
+                    <li><strong>Citron Vert :</strong> 5</li>
+                    <li><strong>Lait de coco :</strong> 100 ml</li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">Découper le thon en dés, mettre dans un plat et recouvrir de jus de citron vert (mieux vaut prendre un plat large et peu profond). Laisser reposer au réfrigérateur au moins 2...</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <picture>
+              <img src="./assets/images/recipe.png" class="card-img-top" alt="Poisson cru">
+            </picture>
+            <div class="card-body">
+              <header class="row">
+                <h2 class="card-title">Poisson Cru à la tahitienne</h2>
+                <div class="card-time">60 min</div>
+              </header>
+              <div class="row mt-3">
+                <div class="col-6">
+                  <ul class="card-ingredients">
+                    <li><strong>Thon Rouge (ou blanc) :</strong> 200g</li>
+                    <li><strong>Concombre :</strong> 1</li>
+                    <li><strong>Tomate :</strong> 2</li>
+                    <li><strong>Carotte :</strong> 1</li>
+                    <li><strong>Citron Vert :</strong> 5</li>
+                    <li><strong>Lait de coco :</strong> 100 ml</li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">Découper le thon en dés, mettre dans un plat et recouvrir de jus de citron vert (mieux vaut prendre un plat large et peu profond). Laisser reposer au réfrigérateur au moins 2...</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <picture>
+              <img src="./assets/images/recipe.png" class="card-img-top" alt="Poisson cru">
+            </picture>
+            <div class="card-body">
+              <header class="row">
+                <h2 class="card-title">Poisson Cru à la tahitienne</h2>
+                <div class="card-time">60 min</div>
+              </header>
+              <div class="row mt-3">
+                <div class="col-6">
+                  <ul class="card-ingredients">
+                    <li><strong>Thon Rouge (ou blanc) :</strong> 200g</li>
+                    <li><strong>Concombre :</strong> 1</li>
+                    <li><strong>Tomate :</strong> 2</li>
+                    <li><strong>Carotte :</strong> 1</li>
+                    <li><strong>Citron Vert :</strong> 5</li>
+                    <li><strong>Lait de coco :</strong> 100 ml</li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">Découper le thon en dés, mettre dans un plat et recouvrir de jus de citron vert (mieux vaut prendre un plat large et peu profond). Laisser reposer au réfrigérateur au moins 2...</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="card">
+            <picture>
+              <img src="./assets/images/recipe.png" class="card-img-top" alt="Poisson cru">
+            </picture>
+            <div class="card-body">
+              <header class="row">
+                <h2 class="card-title">Poisson Cru à la tahitienne</h2>
+                <div class="card-time">60 min</div>
+              </header>
+              <div class="row mt-3">
+                <div class="col-6">
+                  <ul class="card-ingredients">
+                    <li><strong>Thon Rouge (ou blanc) :</strong> 200g</li>
+                    <li><strong>Concombre :</strong> 1</li>
+                    <li><strong>Tomate :</strong> 2</li>
+                    <li><strong>Carotte :</strong> 1</li>
+                    <li><strong>Citron Vert :</strong> 5</li>
+                    <li><strong>Lait de coco :</strong> 100 ml</li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <p class="card-text">Découper le thon en dés, mettre dans un plat et recouvrir de jus de citron vert (mieux vaut prendre un plat large et peu profond). Laisser reposer au réfrigérateur au moins 2...</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        
+        </div>
+      </div>
+    </main>
+    <script type="module" src="./js/App.js"></script>
+  </body>
+</html>
