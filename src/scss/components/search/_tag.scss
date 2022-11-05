@@ -31,5 +31,10 @@ $tag-colors: (
       size: contain;
       position: center;
     }
+    transition: transform .2s ease-in-out;
+
+    &:hover {
+      transform: rotate(90deg);
+    }
   }
 }

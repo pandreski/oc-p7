@@ -1,12 +1,17 @@
 import * as bootstrap from 'bootstrap';
 import SearchDropdown from './decorator/SearchDropdown';
-import SearchTag from './factory/tag';
+import SearchTag from './factory/Tag';
 import { recipes } from '../../data/recipes';
+import RecipeDataAdapter from './adapters/RecipeDataAdapter';
+import Recipe from './models/Recipe';
+import RecipeCard from './templates/RecipeCard';
 
 class App {
-  constructor(allRecipes) {
-    this.recipes = allRecipes;
-    console.log(this.recipes);
+  constructor(data) {
+    this.recipes = [];
+    this.recipesWrapper = document.querySelector('.recipes-listing');
+    this.recipesAdapter = new RecipeDataAdapter(data);
+    this.recipesData = this.recipesAdapter.formattedData;
   }
 
   initSearchDropdown() {
@@ -25,6 +30,15 @@ class App {
     });
   }
 
+  fetchRecipes() {
+    this.recipesData.forEach((recipe) => {
+      const keyLabel = Object.keys(recipe)[0];
+      const recipeElement = new Recipe(recipe[keyLabel]);
+
+      this.recipes = [...this.recipes, recipeElement];
+    });
+  }
+
   initTags() {
     const tags = document.querySelectorAll('.tags .tag');
 
@@ -36,6 +50,12 @@ class App {
   main() {
     this.initSearchDropdown();
     this.initTags();
+    this.fetchRecipes();
+
+    this.recipes.forEach((recipe) => {
+      const Template = new RecipeCard(recipe);
+      this.recipesWrapper.appendChild(Template.createRecipeCard());
+    });
   }
 }
 
