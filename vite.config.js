@@ -1,5 +1,4 @@
 export default {
-  publicDir: 'docs',
   root: 'src',
   resolve: {
     alias: {
@@ -9,5 +8,8 @@ export default {
   server: {
     port: 4200,
     hot: true,
+  },
+  build: {
+    outDir: '../docs',
   },
 };
