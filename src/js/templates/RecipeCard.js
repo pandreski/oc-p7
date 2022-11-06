@@ -1,3 +1,5 @@
+import image from '../../assets/images/recipe.png';
+
 export default class RecipeCard {
   constructor(recipe) {
     this.recipe = recipe;
@@ -20,7 +22,7 @@ export default class RecipeCard {
     cardWrapper.classList.add('card');
     const recipeCard = `
       <picture>
-        <img src="./assets/images/recipe.png" class="card-img-top" alt="${this.recipe.name}">
+        <img src="${image}" class="card-img-top" alt="${this.recipe.name}">
       </picture>
       <div class="card-body">
         <header class="row">
