@@ -1,10 +1,11 @@
 import * as bootstrap from 'bootstrap';
-import SearchDropdown from './decorator/SearchDropdown';
+import SearchDropdown from './factory/SearchDropdown';
 import SearchTag from './factory/Tag';
 import { recipes } from '../../data/recipes';
 import RecipeDataAdapter from './adapters/RecipeDataAdapter';
 import Recipe from './models/Recipe';
 import RecipeCard from './templates/RecipeCard';
+import DropdownList from './factory/DropdownList';
 
 class App {
   constructor(data) {
@@ -15,10 +16,17 @@ class App {
   }
 
   initSearchDropdown() {
-    const dropdownList = document.querySelectorAll('.dropdown');
+    const dropdownElements = document.querySelectorAll('.dropdown');
+    const dropdownList = new DropdownList(this.recipesData);
 
-    dropdownList.forEach((dropdown) => {
+    dropdownElements.forEach((dropdown) => {
       const searchDropdown = new SearchDropdown(dropdown);
+
+      // Get initial list of options for the current dropdown
+      const options = dropdownList.getList(dropdown.getAttribute('data-identifier'));
+
+      // Insert options in the dropdown
+      searchDropdown.updateList(options);
 
       dropdown.addEventListener('shown.bs.dropdown', () => {
         searchDropdown.handleShow();

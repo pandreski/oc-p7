@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Les petits plats</title>
-    <script type="module" crossorigin src="/oc-p7/assets/index.c83e9d47.js"></script>
-    <link rel="stylesheet" href="/oc-p7/assets/index.df4898e1.css">
+    <script type="module" crossorigin src="/oc-p7/assets/index.d433a017.js"></script>
+    <link rel="stylesheet" href="/oc-p7/assets/index.4ba3713a.css">
   </head>
   <body>
     <header>
@@ -53,11 +53,10 @@
               </div>
 
               <div class="secondary-filters--wrapper d-inline-flex mt-3">
-                <div class="dropdown">
+                <div class="dropdown" data-identifier="ingredients">
                   <button type="button" 
                     class="btn btn-primary text-light py-3 dropdown-toggle text-start" 
                     data-bs-auto-close="outside" 
-                    data-identifier="ingredients" 
                     data-bs-toggle="dropdown" 
                     aria-expanded="false" 
                     data-bs-offset="0,0">
@@ -65,53 +64,15 @@
                   </button>
                   <div class="dropdown-menu text-bg-primary text-light">
                     <div class="container">
-                      <div class="row flex-nowrap items-columns">
-                        <div class="col-md-4 items-list">
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                        </div>
-                        <div class="col-md-4 items-list">
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                        </div>
-                        <div class="col-md-4 items-list">
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                        </div>
-                      </div>
+                      <ul class="row items-list"></ul>
                     </div>
                   </div>
                 </div>
 
-                <div class="dropdown">
+                <div class="dropdown" data-identifier="appliance">
                   <button type="button" 
                     class="btn btn-secondary text-light py-3 dropdown-toggle text-start" 
                     data-bs-auto-close="outside" 
-                    data-identifier="appliance" 
                     data-bs-toggle="dropdown" 
                     aria-expanded="false" 
                     data-bs-offset="0,0">
@@ -119,53 +80,15 @@
                   </button>
                   <div class="dropdown-menu text-bg-secondary text-light">
                     <div class="container">
-                      <div class="row flex-nowrap items-columns">
-                        <div class="col-md-4 items-list">
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                        </div>
-                        <div class="col-md-4 items-list">
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                        </div>
-                        <div class="col-md-4 items-list">
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                        </div>
-                      </div>
+                      <ul class="row items-list"></ul>
                     </div>
                   </div>
                 </div>
 
-                <div class="dropdown">
+                <div class="dropdown" data-identifier="ustensils">
                   <button type="button" 
                     class="btn btn-tertiary text-light py-3 dropdown-toggle text-start" 
-                    data-bs-auto-close="outside" 
-                    data-identifier="ustensils" 
+                    data-bs-auto-close="outside"
                     data-bs-toggle="dropdown" 
                     aria-expanded="false" 
                     data-bs-offset="0,0">
@@ -173,44 +96,7 @@
                   </button>
                   <div class="dropdown-menu text-bg-tertiary text-light">
                     <div class="container">
-                      <div class="row flex-nowrap items-columns">
-                        <div class="col-md-4 items-list">
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                        </div>
-                        <div class="col-md-4 items-list">
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                        </div>
-                        <div class="col-md-4 items-list">
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                          <button class="item">Riz blanc</button>
-                        </div>
-                      </div>
+                      <ul class="row items-list"></ul>
                     </div>
                   </div>
                 </div>

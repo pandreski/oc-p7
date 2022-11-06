@@ -4,7 +4,8 @@ export default class SearchDropdown {
     this.dropdownButton = this.dropdown.querySelector('.dropdown-toggle');
     this.dropdownMenu = this.dropdown.querySelector('.dropdown-menu');
     this.buttonLabel = this.dropdownButton.innerText;
-    this.identifier = this.dropdownButton.getAttribute('data-identifier');
+    this.identifier = this.dropdown.getAttribute('data-identifier');
+    this.listWrapper = this.dropdownMenu.querySelector('.items-list');
   }
 
   // Set equal width between button and menu
@@ -62,5 +63,10 @@ export default class SearchDropdown {
       e.preventDefault();
       e.target.value += ' ';
     }
+  }
+
+  updateList(data) {
+    const dataDom = data.map((option) => `<li class="col-md-4 item"><button>${option}</button></li>`).join('');
+    this.listWrapper.innerHTML = dataDom;
   }
 }
