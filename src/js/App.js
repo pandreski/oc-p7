@@ -2,31 +2,43 @@ import * as bootstrap from 'bootstrap';
 import SearchDropdown from './factory/SearchDropdown';
 import SearchTag from './factory/Tag';
 import { recipes } from '../../data/recipes';
-import RecipeDataAdapter from './adapters/RecipeDataAdapter';
 import Recipe from './models/Recipe';
 import RecipeCard from './templates/RecipeCard';
-import DropdownList from './factory/DropdownList';
+import Data from './models/Data';
 
 class App {
   constructor(data) {
     this.recipes = [];
     this.recipesWrapper = document.querySelector('.recipes-listing');
-    this.recipesAdapter = new RecipeDataAdapter(data);
-    this.recipesData = this.recipesAdapter.formattedData;
+    this.recipesData = new Data(data);
+
+    // console.log(this.recipesData.byName);
+    // console.log(this.recipesData.byIngredient);
+    // console.log(this.recipesData.byAppliance);
+    // console.log(this.recipesData.byUstensil);
+    // console.log(this.recipesData.byDescription);
   }
 
   initSearchDropdown() {
     const dropdownElements = document.querySelectorAll('.dropdown');
-    const dropdownList = new DropdownList(this.recipesData);
 
     dropdownElements.forEach((dropdown) => {
       const searchDropdown = new SearchDropdown(dropdown);
+      const identifier = dropdown.getAttribute('data-identifier');
 
-      // Get initial list of options for the current dropdown
-      const options = dropdownList.getList(dropdown.getAttribute('data-identifier'));
-
-      // Insert options in the dropdown
-      searchDropdown.updateList(options);
+      switch (identifier) {
+        case 'ingredients':
+          searchDropdown.updateList(this.recipesData.byIngredient);
+          break;
+        case 'appliance':
+          searchDropdown.updateList(this.recipesData.byAppliance);
+          break;
+        case 'ustensils':
+          searchDropdown.updateList(this.recipesData.byUstensil);
+          break;
+        default:
+          break;
+      }
 
       dropdown.addEventListener('shown.bs.dropdown', () => {
         searchDropdown.handleShow();
@@ -39,7 +51,7 @@ class App {
   }
 
   fetchRecipes() {
-    this.recipesData.forEach((recipe) => {
+    this.recipesData.byName.forEach((recipe) => {
       const keyLabel = Object.keys(recipe)[0];
       const recipeElement = new Recipe(recipe[keyLabel]);
 
