@@ -1,4 +1,5 @@
 import image from '../../assets/images/recipe.png';
+import Recipe from '../models/Recipe';
 
 export default class RecipeCard {
   constructor(recipe) {
@@ -12,31 +13,33 @@ export default class RecipeCard {
   ingredientFormatter(ingredient) {
     return `
       <li>
-        <strong>${ingredient.ingredient} :</strong> 
-        ${ingredient.hasOwnProperty('quantity') ? ingredient.quantity : ''} ${ingredient.hasOwnProperty('unit') ? ingredient.unit : ''}
+        <strong>${ingredient.ingredient}</strong> 
+        ${ingredient.hasOwnProperty('quantity') ? ` : ${ingredient.quantity}` : ''} ${ingredient.hasOwnProperty('unit') ? ingredient.unit : ''}
       </li>`;
   }
 
   createRecipeCard() {
+    const keyLabel = Object.keys(this.recipe)[0];
+    const recipe = new Recipe(this.recipe[keyLabel]);
     const cardWrapper = document.createElement('article');
     cardWrapper.classList.add('card');
     const recipeCard = `
       <picture>
-        <img src="${image}" class="card-img-top" alt="${this.recipe.name}">
+        <img src="${image}" class="card-img-top" alt="${recipe.name}">
       </picture>
       <div class="card-body">
         <header class="row">
-          <h2 class="card-title">${this.recipe.name}</h2>
-          <div class="card-time">${this.recipe.time} min</div>
+          <h2 class="card-title">${recipe.name}</h2>
+          <div class="card-time">${recipe.time} min</div>
         </header>
         <div class="row mt-3">
           <div class="col-6">
             <ul class="card-ingredients">
-              ${this.recipe.ingredients.map(this.ingredientFormatter).join('')}
+              ${recipe.ingredients.map(this.ingredientFormatter).join('')}
             </ul>
           </div>
           <div class="col-6">
-            <p class="card-text">${this.recipe.description}</p>
+            <p class="card-text">${recipe.description}</p>
           </div>
         </div>
       </div>

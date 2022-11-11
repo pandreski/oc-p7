@@ -5,18 +5,13 @@ import { recipes } from '../../data/recipes';
 import Recipe from './models/Recipe';
 import RecipeCard from './templates/RecipeCard';
 import Data from './models/Data';
+import SearchForm from './search/SearchForm';
 
 class App {
   constructor(data) {
     this.recipes = [];
     this.recipesWrapper = document.querySelector('.recipes-listing');
     this.recipesData = new Data(data);
-
-    // console.log(this.recipesData.byName);
-    // console.log(this.recipesData.byIngredient);
-    // console.log(this.recipesData.byAppliance);
-    // console.log(this.recipesData.byUstensil);
-    // console.log(this.recipesData.byDescription);
   }
 
   initSearchDropdown() {
@@ -50,15 +45,6 @@ class App {
     });
   }
 
-  fetchRecipes() {
-    this.recipesData.byName.forEach((recipe) => {
-      const keyLabel = Object.keys(recipe)[0];
-      const recipeElement = new Recipe(recipe[keyLabel]);
-
-      this.recipes = [...this.recipes, recipeElement];
-    });
-  }
-
   initTags() {
     const tags = document.querySelectorAll('.tags .tag');
 
@@ -70,9 +56,18 @@ class App {
   main() {
     this.initSearchDropdown();
     this.initTags();
-    this.fetchRecipes();
 
-    this.recipes.forEach((recipe) => {
+    // List of data including name, ingredients and description for main search form
+    const globalDataList = [
+      ...this.recipesData.byName,
+      ...this.recipesData.byIngredient,
+      ...this.recipesData.byDescription];
+
+    const Search = new SearchForm(globalDataList);
+    Search.render();
+
+    // Populate default listing before any sorting
+    this.recipesData.byName.forEach((recipe) => {
       const Template = new RecipeCard(recipe);
       this.recipesWrapper.appendChild(Template.createRecipeCard());
     });
