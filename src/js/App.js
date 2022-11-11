@@ -23,13 +23,13 @@ class App {
 
       switch (identifier) {
         case 'ingredients':
-          searchDropdown.updateList(this.recipesData.byIngredient);
+          searchDropdown.updateList(this.recipesData.byIngredient, 'primary');
           break;
         case 'appliance':
-          searchDropdown.updateList(this.recipesData.byAppliance);
+          searchDropdown.updateList(this.recipesData.byAppliance, 'secondary');
           break;
         case 'ustensils':
-          searchDropdown.updateList(this.recipesData.byUstensil);
+          searchDropdown.updateList(this.recipesData.byUstensil, 'tertiary');
           break;
         default:
           break;

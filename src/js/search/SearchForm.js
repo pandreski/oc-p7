@@ -6,7 +6,6 @@ import EmptyResult from '../templates/EmptyResult';
 export default class SearchForm {
   constructor(Recipes) {
     this.Recipes = Recipes;
-    this.isSearchingByActor = false;
 
     this.recipesWrapper = document.querySelector('.recipes-listing');
     this.searchForm = document.getElementById('main-search-input');

@@ -1,16 +1,29 @@
 export default class SearchTag {
-  constructor(tag) {
-    this.tag = tag;
-    this.deleteButton = this.tag.querySelector('.delete');
-
-    this.initTag();
+  constructor(label, style) {
+    this.label = label;
+    this.style = style;
+    this.wrapper = document.querySelector('.secondary-filters .tags');
   }
 
-  initTag() {
-    this.deleteButton.addEventListener('click', this.handleDelete);
+  create() {
+    const tagDOM = document.createElement('div');
+    tagDOM.classList.add('tag', `tag-${this.style}`, 'me-3');
+
+    const labelDOM = document.createElement('span');
+    labelDOM.classList.add('label');
+    labelDOM.innerText = this.label;
+
+    const buttonDOM = document.createElement('button');
+    buttonDOM.classList.add('delete');
+    buttonDOM.setAttribute('aria-label', 'Supprimer le tag');
+    buttonDOM.addEventListener('click', this.handleDelete);
+
+    tagDOM.append(labelDOM);
+    tagDOM.append(buttonDOM);
+    this.wrapper.append(tagDOM);
   }
 
-  handleDelete() {
-    console.log('delete tag', this.tag); // TODO: delete tag for real
+  handleDelete(e) {
+    e.target.parentNode.remove();
   }
 }

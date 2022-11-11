@@ -4,7 +4,7 @@ export default class RecipeListAdapter {
   }
 
   /**
-   * Get single elements from the given list.
+   * Get single elements from the given list (delete duplicates).
    *
    * @returns {Array} Recipes list with single elements
    */

@@ -1,3 +1,5 @@
+import SearchTag from './Tag';
+
 export default class SearchDropdown {
   constructor(dropdown) {
     this.dropdown = dropdown;
@@ -77,11 +79,19 @@ export default class SearchDropdown {
   /**
    * Update dropdown listing with given data.
    *
-   * @param {Array} data
+   * @param {Array} data    Recipe list
+   * @param {String} style  Bootstrap color class
    */
-  updateList(data) {
+  updateList(data, style) {
     const sortedData = this.getUniqueElements(data);
     const dataDom = sortedData.map((option) => `<li class="col-md-4 item"><button>${option}</button></li>`).join('');
+
     this.listWrapper.innerHTML = dataDom;
+    this.listWrapper.querySelectorAll('.item button').forEach((elem) => {
+      elem.addEventListener('click', (e) => {
+        const tag = new SearchTag(e.target.innerText, style);
+        tag.create();
+      });
+    });
   }
 }
