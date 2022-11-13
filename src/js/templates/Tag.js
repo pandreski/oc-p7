@@ -1,9 +1,9 @@
 export default class Tag {
-  constructor(label, listId) {
+  constructor(label, category) {
     this.label = label;
-    this.wrapper = document.querySelector('.secondary-filters .tags');
+    this.category = category;
 
-    switch (listId) {
+    switch (category) {
       case 'appliance':
         this.style = 'secondary';
         break;
@@ -19,6 +19,7 @@ export default class Tag {
   create() {
     const tagDOM = document.createElement('div');
     tagDOM.classList.add('tag', `tag-${this.style}`, 'me-3', 'mt-2');
+    tagDOM.setAttribute('data-category', this.category);
 
     const labelDOM = document.createElement('span');
     labelDOM.classList.add('label');
@@ -27,16 +28,10 @@ export default class Tag {
     const buttonDOM = document.createElement('button');
     buttonDOM.classList.add('delete');
     buttonDOM.setAttribute('aria-label', 'Supprimer le tag');
-    buttonDOM.addEventListener('click', this.handleDelete);
 
     tagDOM.append(labelDOM);
     tagDOM.append(buttonDOM);
-    this.wrapper.append(tagDOM);
-  }
 
-  handleDelete(e) {
-    e.target.parentNode.remove();
-    // TODO: update results
-    // TODO: update all dropdown choices
+    return tagDOM;
   }
 }

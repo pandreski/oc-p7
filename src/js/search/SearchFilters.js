@@ -1,6 +1,6 @@
 import SearchDropdown from '../factory/SearchDropdown';
-import Tag from '../factory/Tag';
-import RecipeQuerySearch from './QuerySearch';
+import Tag from '../templates/Tag';
+import RecipeCategorySearch from './CategorySearch';
 import RecipeListAdapter from '../adapters/RecipeListAdapter';
 import RecipeCard from '../templates/RecipeCard';
 import EmptyResult from '../templates/EmptyResult';
@@ -10,6 +10,7 @@ export default class SearchFilters {
   constructor(Recipes) {
     this.Recipes = Recipes;
     this.recipesWrapper = document.querySelector('.recipes-listing');
+    this.tagWrapper = document.querySelector('.secondary-filters .tags');
     this.activeFilters = {
       ingredients: [],
       appliance: [],
@@ -53,6 +54,11 @@ export default class SearchFilters {
     this.search();
   }
 
+  removeActiveFilter(filterName, category) {
+    const index = this.activeFilters[category].findIndex((elem) => elem === filterName);
+    this.activeFilters[category].splice(index, 1);
+  }
+
   search() {
     const activeFiltersDictionary = Object.entries(this.activeFilters);
     const matchingFilters = []; // List of recipes having at least 1 matching filter
@@ -66,13 +72,13 @@ export default class SearchFilters {
 
       switch (elem[0]) {
         case 'ingredients':
-          QuerySearch = new RecipeQuerySearch(this.Recipes.byIngredient);
+          QuerySearch = new RecipeCategorySearch(this.Recipes.byIngredient);
           break;
         case 'appliance':
-          QuerySearch = new RecipeQuerySearch(this.Recipes.byAppliance);
+          QuerySearch = new RecipeCategorySearch(this.Recipes.byAppliance);
           break;
         case 'ustensils':
-          QuerySearch = new RecipeQuerySearch(this.Recipes.byUstensil);
+          QuerySearch = new RecipeCategorySearch(this.Recipes.byUstensil);
           break;
         default:
           break;
@@ -89,7 +95,12 @@ export default class SearchFilters {
     });
 
     const matchingRecipes = this.getMatchingRecipes(matchingFilters);
-    this.displayRecipes(matchingRecipes);
+
+    if (matchingRecipes.length) {
+      this.displayRecipes(matchingRecipes); // display filtered recipes
+    } else {
+      this.displayRecipes(this.Recipes.byName); // display all recipes
+    }
   }
 
   /**
@@ -139,8 +150,8 @@ export default class SearchFilters {
     const singleRecipesList = recipesAdapter.getSingleElements();
 
     if (singleRecipesList.length) {
-      singleRecipesList.forEach((Recipe) => {
-        const Template = new RecipeCard(Recipe);
+      singleRecipesList.forEach((elem) => {
+        const Template = new RecipeCard(elem);
         this.recipesWrapper.appendChild(Template.createRecipeCard());
       });
     } else {
@@ -182,16 +193,26 @@ export default class SearchFilters {
     listWrapper.querySelectorAll('.item button').forEach((elem) => {
       elem.addEventListener('click', (e) => {
         const tag = new Tag(e.target.innerText, identifier);
-        tag.create();
-        // TODO: update results
+        const tagDOM = tag.create();
+
         this.setActiveFilter(e.target.innerText, identifier);
+
+        const that = this;
+
+        tagDOM.querySelector('.delete').addEventListener('click', this.onTagDelete.bind(that));
+        that.tagWrapper.append(tagDOM);
         // TODO: update all dropdown choices
       });
     });
   }
 
-  onFilterSearch() {
-    // TODO:
+  onTagDelete(e) {
+    const label = e.target.parentNode.querySelector('.label').innerText;
+    const category = e.target.parentNode.getAttribute('data-category');
+
+    this.removeActiveFilter(label, category);
+    e.target.parentNode.remove();
+    this.search();
   }
 
   render() {
