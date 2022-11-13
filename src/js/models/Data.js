@@ -56,4 +56,17 @@ export default class Data {
 
     return list;
   }
+
+  get full() {
+    let list = [];
+
+    list = [
+      ...this.byName,
+      ...this.byIngredient,
+      ...this.byAppliance,
+      ...this.byUstensil,
+      ...this.byDescription];
+
+    return list;
+  }
 }

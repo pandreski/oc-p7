@@ -1,13 +1,24 @@
-export default class SearchTag {
-  constructor(label, style) {
+export default class Tag {
+  constructor(label, listId) {
     this.label = label;
-    this.style = style;
     this.wrapper = document.querySelector('.secondary-filters .tags');
+
+    switch (listId) {
+      case 'appliance':
+        this.style = 'secondary';
+        break;
+      case 'ustensils':
+        this.style = 'tertiary';
+        break;
+      default:
+        this.style = 'primary';
+        break;
+    }
   }
 
   create() {
     const tagDOM = document.createElement('div');
-    tagDOM.classList.add('tag', `tag-${this.style}`, 'me-3');
+    tagDOM.classList.add('tag', `tag-${this.style}`, 'me-3', 'mt-2');
 
     const labelDOM = document.createElement('span');
     labelDOM.classList.add('label');
@@ -25,5 +36,7 @@ export default class SearchTag {
 
   handleDelete(e) {
     e.target.parentNode.remove();
+    // TODO: update results
+    // TODO: update all dropdown choices
   }
 }

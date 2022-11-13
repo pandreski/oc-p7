@@ -1,6 +1,6 @@
 import Search from './Search';
 
-export default class RecipeGlobalSearch extends Search {
+export default class RecipeQuerySearch extends Search {
   /**
    * Get all corresponding results from a query.
    * May contain duplicate entries.
@@ -12,7 +12,7 @@ export default class RecipeGlobalSearch extends Search {
     let res = [];
 
     this.Recipes.forEach((recipe) => {
-      if (Object.keys(recipe)[0].includes(query.toLowerCase())) {
+      if (Object.keys(recipe)[0] === query.toLowerCase()) {
         res = [...res, recipe];
       }
     });

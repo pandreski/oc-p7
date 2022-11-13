@@ -1,5 +1,3 @@
-import SearchTag from './Tag';
-
 export default class SearchDropdown {
   constructor(dropdown) {
     this.dropdown = dropdown;
@@ -7,7 +5,6 @@ export default class SearchDropdown {
     this.dropdownMenu = this.dropdown.querySelector('.dropdown-menu');
     this.buttonLabel = this.dropdownButton.innerText;
     this.identifier = this.dropdown.getAttribute('data-identifier');
-    this.listWrapper = this.dropdownMenu.querySelector('.items-list');
   }
 
   // Set equal width between button and menu
@@ -60,38 +57,5 @@ export default class SearchDropdown {
       e.preventDefault();
       e.target.value += ' ';
     }
-  }
-
-  /**
-  * Delete duplicated elements from the list.
-  * Uppercase the first letter of each element.
-  *
-  * @param {Array} list Array of objects with value as key
-  * @returns {Array} Array of single key elements
-  */
-  getUniqueElements(list) {
-    let uniqueData = list.map((elem) => Object.keys(elem)[0]);
-    uniqueData = [...new Set(uniqueData)];
-    uniqueData = uniqueData.map((elem) => elem.charAt(0).toUpperCase() + elem.slice(1));
-    return uniqueData;
-  }
-
-  /**
-   * Update dropdown listing with given data.
-   *
-   * @param {Array} data    Recipe list
-   * @param {String} style  Bootstrap color class
-   */
-  updateList(data, style) {
-    const sortedData = this.getUniqueElements(data);
-    const dataDom = sortedData.map((option) => `<li class="col-md-4 item"><button>${option}</button></li>`).join('');
-
-    this.listWrapper.innerHTML = dataDom;
-    this.listWrapper.querySelectorAll('.item button').forEach((elem) => {
-      elem.addEventListener('click', (e) => {
-        const tag = new SearchTag(e.target.innerText, style);
-        tag.create();
-      });
-    });
   }
 }

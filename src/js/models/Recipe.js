@@ -43,4 +43,12 @@ export default class Recipe {
   get ustensils() {
     return this.recipe_ustensils;
   }
+
+  get ingredientsName() {
+    const names = [];
+    this.recipe_ingredients.forEach((element) => {
+      names.push(element.ingredient);
+    });
+    return names;
+  }
 }

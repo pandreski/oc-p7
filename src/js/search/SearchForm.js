@@ -1,4 +1,4 @@
-import RecipeGlobalSearch from './GlobalSearch';
+import RecipeQuerySearch from './QuerySearch';
 import RecipeCard from '../templates/RecipeCard';
 import RecipeListAdapter from '../adapters/RecipeListAdapter';
 import EmptyResult from '../templates/EmptyResult';
@@ -10,11 +10,11 @@ export default class SearchForm {
     this.recipesWrapper = document.querySelector('.recipes-listing');
     this.searchForm = document.getElementById('main-search-input');
 
-    this.RecipeGlobalSearch = new RecipeGlobalSearch(this.Recipes);
+    this.RecipeQuerySearch = new RecipeQuerySearch(this.Recipes);
   }
 
   search(query) {
-    const SearchedRecipes = this.RecipeGlobalSearch.search(query);
+    const SearchedRecipes = this.RecipeQuerySearch.search(query);
     this.displayRecipes(SearchedRecipes);
   }
 
