@@ -1,10 +1,11 @@
 import SearchDropdown from '../factory/SearchDropdown';
 import Tag from '../templates/Tag';
-import RecipeCategorySearch from './CategorySearch';
+import RecipeCategorySearch from './RecipeCategorySearch';
 import RecipeListAdapter from '../adapters/RecipeListAdapter';
 import RecipeCard from '../templates/RecipeCard';
 import EmptyResult from '../templates/EmptyResult';
 import Recipe from '../models/Recipe';
+import FilterCategorySearch from './FilterCategorySearch';
 
 export default class SearchFilters {
   constructor(Recipes) {
@@ -24,13 +25,63 @@ export default class SearchFilters {
     };
   }
 
-  handleFilterInput(e) {
+  resetRemainingFilters() {
+    this.remainingFilters = {
+      ingredients: [],
+      appliance: [],
+      ustensils: [],
+    };
+  }
+
+  /**
+   * Discard default bootstrap's behavior:
+   * do not clos dropdown on "Space" keypress.
+   *
+   * @param {Event} e   Input "keydown" event
+  */
+  handleFilterKeydown(e) {
     if (e.code === 'Space') {
       e.preventDefault();
       e.target.value += ' ';
     }
   }
 
+  /**
+   * Filter dropdown elements with input query
+   *
+   * @param {Event} e   Input "input" event
+   */
+  handleFilterInput(e) {
+    let filtersList;
+    let category;
+
+    switch (e.target.id) {
+      case 'search-ingredients-input':
+        filtersList = this.remainingFilters.ingredients;
+        category = 'ingredients';
+        break;
+      case 'search-appliance-input':
+        filtersList = this.remainingFilters.appliance;
+        category = 'appliance';
+        break;
+      case 'search-ustensils-input':
+        filtersList = this.remainingFilters.ustensils;
+        category = 'ustensils';
+        break;
+      default:
+        break;
+    }
+
+    const filtersCategorySearch = new FilterCategorySearch(filtersList);
+    const filteredElements = filtersCategorySearch.search(e.target.value);
+    const dropdown = document.querySelector(`.dropdown[data-identifier="${category}"]`);
+
+    this.updateList(this.upperCaseList(filteredElements), dropdown);
+  }
+
+  /**
+   * Initialize default data values & dropdown event listeners.
+   */
   initSearchDropdown() {
     this.dropdownElements.forEach((dropdown) => {
       const searchDropdown = new SearchDropdown(dropdown);
@@ -40,36 +91,34 @@ export default class SearchFilters {
       switch (identifier) {
         case 'ingredients':
           this.updateList(this.getUniqueElements(this.Recipes.byIngredient), dropdown);
+          this.remainingFilters.ingredients = this.getUniqueElements(this.Recipes.byIngredient);
           break;
         case 'appliance':
           this.updateList(this.getUniqueElements(this.Recipes.byAppliance), dropdown);
+          this.remainingFilters.appliance = this.getUniqueElements(this.Recipes.byAppliance);
           break;
         case 'ustensils':
           this.updateList(this.getUniqueElements(this.Recipes.byUstensil), dropdown);
+          this.remainingFilters.ustensils = this.getUniqueElements(this.Recipes.byUstensil);
           break;
         default:
           break;
       }
 
+      const that = this;
       dropdown.addEventListener('shown.bs.dropdown', () => {
         searchDropdown.handleShow();
-        input.addEventListener('keydown', this.handleFilterInput);
+        input.addEventListener('keydown', (e) => this.handleFilterKeydown(e));
+        input.addEventListener('input', (e) => this.handleFilterInput(e));
       });
 
       dropdown.addEventListener('hide.bs.dropdown', () => {
         searchDropdown.handleHide();
         input.value = '';
-        input.removeEventListener('keydown', this.handleFilterInput);
+        input.removeEventListener('keydown', (e) => this.handleFilterKeydown(e));
+        input.removeEventListener('input', (e) => this.handleFilterInput(e));
       });
     });
-  }
-
-  resetRemainingFilters() {
-    this.remainingFilters = {
-      ingredients: [],
-      appliance: [],
-      ustensils: [],
-    };
   }
 
   /**
@@ -324,6 +373,13 @@ export default class SearchFilters {
     });
   }
 
+  /**
+   * Instructions for tag deletion:
+   * - update activeFilter
+   * - remove DOM element
+   *
+   * @param {Event} e
+   */
   onTagDelete(e) {
     const label = e.target.parentNode.querySelector('.label').innerText;
     const category = e.target.parentNode.getAttribute('data-category');
