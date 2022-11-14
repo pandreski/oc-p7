@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Les petits plats</title>
-    <script type="module" crossorigin src="/oc-p7/assets/index.922d413e.js"></script>
+    <script type="module" crossorigin src="/oc-p7/assets/index.0ebf4ea9.js"></script>
     <link rel="stylesheet" href="/oc-p7/assets/index.4ba3713a.css">
   </head>
   <body>
@@ -46,7 +46,11 @@
                     data-bs-toggle="dropdown" 
                     aria-expanded="false" 
                     data-bs-offset="0,0">
-                    Ingrédients
+                    <span class="button-label">Ingrédients</span>
+                    <form id="dropdown-search-ingredients" class="d-none">
+                      <label class="visually-hidden" for="search-ingredients-input">Rechercher un ingrédient</label>
+                      <input type="text" id="search-ingredients-input" name="search-ingredients-input" placeholder="Rechercher un ingrédient">
+                    </form>
                   </button>
                   <div class="dropdown-menu text-bg-primary text-light">
                     <div class="container">
@@ -62,7 +66,11 @@
                     data-bs-toggle="dropdown" 
                     aria-expanded="false" 
                     data-bs-offset="0,0">
-                    Appareils
+                    <span class="button-label">Appareils</span>
+                    <form id="dropdown-search-appliance" class="d-none">
+                      <label class="visually-hidden" for="search-appliance-input">Rechercher un appareil</label>
+                      <input type="text" id="search-appliance-input" name="search-appliance-input" placeholder="Rechercher un appareil">
+                    </form>
                   </button>
                   <div class="dropdown-menu text-bg-secondary text-light">
                     <div class="container">
@@ -78,7 +86,11 @@
                     data-bs-toggle="dropdown" 
                     aria-expanded="false" 
                     data-bs-offset="0,0">
-                    Ustensiles
+                    <span class="button-label">Ustensiles</span>
+                    <form id="dropdown-search-ustensils" class="d-none">
+                      <label class="visually-hidden" for="search-ustensils-input">Rechercher un ustensile</label>
+                      <input type="text" id="search-ustensils-input" name="search-ustensils-input" placeholder="Rechercher un ustensile">
+                    </form>
                   </button>
                   <div class="dropdown-menu text-bg-tertiary text-light">
                     <div class="container">
