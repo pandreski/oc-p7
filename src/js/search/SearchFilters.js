@@ -6,6 +6,7 @@ import RecipeCard from '../templates/RecipeCard';
 import EmptyResult from '../templates/EmptyResult';
 import Recipe from '../models/Recipe';
 import FilterCategorySearch from './FilterCategorySearch';
+import { upperCaseList, lowerCaseList, getUniqueElements } from '../utils/helpers';
 
 export default class SearchFilters {
   constructor(Recipes) {
@@ -76,7 +77,7 @@ export default class SearchFilters {
     const filteredElements = filtersCategorySearch.search(e.target.value);
     const dropdown = document.querySelector(`.dropdown[data-identifier="${category}"]`);
 
-    this.updateList(this.upperCaseList(filteredElements), dropdown);
+    this.updateList(upperCaseList(filteredElements), dropdown);
   }
 
   /**
@@ -90,32 +91,33 @@ export default class SearchFilters {
 
       switch (identifier) {
         case 'ingredients':
-          this.updateList(this.getUniqueElements(this.Recipes.byIngredient), dropdown);
-          this.remainingFilters.ingredients = this.getUniqueElements(this.Recipes.byIngredient);
+          this.updateList(getUniqueElements(this.Recipes.byIngredient), dropdown);
+          this.remainingFilters.ingredients = getUniqueElements(this.Recipes.byIngredient);
           break;
         case 'appliance':
-          this.updateList(this.getUniqueElements(this.Recipes.byAppliance), dropdown);
-          this.remainingFilters.appliance = this.getUniqueElements(this.Recipes.byAppliance);
+          this.updateList(getUniqueElements(this.Recipes.byAppliance), dropdown);
+          this.remainingFilters.appliance = getUniqueElements(this.Recipes.byAppliance);
           break;
         case 'ustensils':
-          this.updateList(this.getUniqueElements(this.Recipes.byUstensil), dropdown);
-          this.remainingFilters.ustensils = this.getUniqueElements(this.Recipes.byUstensil);
+          this.updateList(getUniqueElements(this.Recipes.byUstensil), dropdown);
+          this.remainingFilters.ustensils = getUniqueElements(this.Recipes.byUstensil);
           break;
         default:
           break;
       }
 
-      const that = this;
       dropdown.addEventListener('shown.bs.dropdown', () => {
         searchDropdown.handleShow();
-        input.addEventListener('keydown', (e) => this.handleFilterKeydown(e));
+        input.addEventListener('keydown', this.handleFilterKeydown);
         input.addEventListener('input', (e) => this.handleFilterInput(e));
       });
 
       dropdown.addEventListener('hide.bs.dropdown', () => {
         searchDropdown.handleHide();
         input.value = '';
-        input.removeEventListener('keydown', (e) => this.handleFilterKeydown(e));
+        // reset list choices
+        this.updateList(upperCaseList(this.remainingFilters[identifier]), dropdown);
+        input.removeEventListener('keydown', this.handleFilterKeydown);
         input.removeEventListener('input', (e) => this.handleFilterInput(e));
       });
     });
@@ -136,9 +138,9 @@ export default class SearchFilters {
       // Check for each filter if this one is already selected.
       // Also check if the filter is already in the "remainingFilters" object.
       // Then, do not include it.
-      const activeIngredients = this.lowerCaseList(this.activeFilters.ingredients);
-      const activeAppliance = this.lowerCaseList(this.activeFilters.appliance);
-      const activeUstensils = this.lowerCaseList(this.activeFilters.ustensils);
+      const activeIngredients = lowerCaseList(this.activeFilters.ingredients);
+      const activeAppliance = lowerCaseList(this.activeFilters.appliance);
+      const activeUstensils = lowerCaseList(this.activeFilters.ustensils);
 
       RecipeObj.ingredients.forEach((ingredient) => {
         if (
@@ -168,7 +170,7 @@ export default class SearchFilters {
 
     this.dropdownElements.forEach((dropdown) => {
       const identifier = dropdown.getAttribute('data-identifier');
-      this.updateList(this.upperCaseList(this.remainingFilters[identifier]), dropdown);
+      this.updateList(upperCaseList(this.remainingFilters[identifier]), dropdown);
     });
   }
 
@@ -310,40 +312,6 @@ export default class SearchFilters {
    */
   clearRecipesWrapper() {
     this.recipesWrapper.innerHTML = '';
-  }
-
-  /**
-   * Uppercase the first letter of all elements from the list given as parameter.
-   *
-   * @param {Array} list  Array of string elements
-   * @returns {Array}     Array of string elements
-   */
-  upperCaseList(list) {
-    return list.map((elem) => elem.charAt(0).toUpperCase() + elem.slice(1));
-  }
-
-  /**
-   * Lowercase all elements from the list given as parameter.
-   *
-   * @param {Array} list  Array of string elements
-   * @returns {Array}     Array of string elements
-   */
-  lowerCaseList(list) {
-    return list.map((elem) => elem.toLowerCase());
-  }
-
-  /**
-  * Delete duplicated elements from the list.
-  * Uppercase the first letter of each element.
-  *
-  * @param {Array} list   Array of objects with value as key
-  * @returns {Array}      Array of single key elements
-  */
-  getUniqueElements(list) {
-    let uniqueData = list.map((elem) => Object.keys(elem)[0]);
-    uniqueData = [...new Set(uniqueData)];
-    uniqueData = this.upperCaseList(uniqueData);
-    return uniqueData;
   }
 
   /**
