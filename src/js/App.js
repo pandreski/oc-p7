@@ -10,7 +10,6 @@ class App {
     this.recipes = [];
     this.recipesWrapper = document.querySelector('.recipes-listing');
     this.recipesData = new Data(data);
-    this.allRecipes = this.recipesData.full;
   }
 
   initSearchForm() {
@@ -20,7 +19,7 @@ class App {
       ...this.recipesData.byIngredient,
       ...this.recipesData.byDescription];
 
-    const Search = new SearchForm(globalDataList);
+    const Search = new SearchForm(globalDataList, this.recipesData);
     Search.render();
   }
 

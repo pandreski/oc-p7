@@ -34,6 +34,14 @@ export default class SearchFilters {
     };
   }
 
+  resetActiveFilters() {
+    this.activeFilters = {
+      ingredients: [],
+      appliance: [],
+      ustensils: [],
+    };
+  }
+
   /**
    * Discard default bootstrap's behavior:
    * do not clos dropdown on "Space" keypress.
@@ -194,6 +202,14 @@ export default class SearchFilters {
   removeActiveFilter(filterName, category) {
     const index = this.activeFilters[category].findIndex((elem) => elem === filterName);
     this.activeFilters[category].splice(index, 1);
+  }
+
+  /**
+   * Reset active filters list and remove all tags.
+   */
+   removeAllActiveFilters() {
+    this.resetActiveFilters();
+    this.tagWrapper.innerHTML = '';
   }
 
   /**

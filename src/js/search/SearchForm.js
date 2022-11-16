@@ -2,19 +2,24 @@ import RecipeQuerySearch from './QuerySearch';
 import RecipeCard from '../templates/RecipeCard';
 import RecipeListAdapter from '../adapters/RecipeListAdapter';
 import EmptyResult from '../templates/EmptyResult';
+import SearchFilters from './SearchFilters';
 
 export default class SearchForm {
-  constructor(Recipes) {
+  constructor(Recipes, recipesData) {
     this.Recipes = Recipes;
+    this.recipesData = recipesData;
 
     this.recipesWrapper = document.querySelector('.recipes-listing');
     this.searchForm = document.getElementById('main-search-input');
 
     this.RecipeQuerySearch = new RecipeQuerySearch(this.Recipes);
+    this.Filters = new SearchFilters(this.recipesData);
   }
 
   search(query) {
     const SearchedRecipes = this.RecipeQuerySearch.search(query);
+    // Update filters
+    this.Filters.updateRemainingFilters(SearchedRecipes);
     this.displayRecipes(SearchedRecipes);
   }
 
@@ -45,6 +50,10 @@ export default class SearchForm {
         this.search(query);
       } else if (query.length === 0) {
         this.displayRecipes(this.Recipes);
+
+        // Reset filters
+        this.Filters.updateRemainingFilters(this.recipesData.byName);
+        this.Filters.removeAllActiveFilters();
       }
     });
   }
