@@ -15,7 +15,6 @@ export default class SearchDropdown {
     this.buttonLabel.classList.add('d-none');
     this.form.classList.remove('d-none');
     this.input.focus();
-    // this.input.addEventListener('keydown', this.handleInput);
     this.input.addEventListener('click', (e) => e.stopPropagation()); // TODO: fix dropdown closing on click
   }
 
@@ -25,11 +24,4 @@ export default class SearchDropdown {
     this.buttonLabel.classList.remove('d-none');
     this.dropdownButton.style.width = '';
   }
-
-  // handleInput(e) {
-  //   if (e.code === 'Space') {
-  //     e.preventDefault();
-  //     e.target.value += ' ';
-  //   }
-  // }
 }
