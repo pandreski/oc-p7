@@ -1,3 +1,4 @@
+import { myIncludes } from '../utils/helpers';
 import Search from './Search';
 
 export default class FilterCategorySearch extends Search {
@@ -13,11 +14,11 @@ export default class FilterCategorySearch extends Search {
 
     if (!query.length) { return this.Recipes; }
 
-    this.Recipes.forEach((recipe) => {
-      if (recipe.toLowerCase().includes(query.toLowerCase())) {
+    for (const recipe of this.Recipes) {
+      if (myIncludes(recipe.toLowerCase(), query.toLowerCase())) {
         res = [...res, recipe];
       }
-    });
+    }
 
     return res;
   }

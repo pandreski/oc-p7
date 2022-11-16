@@ -1,3 +1,5 @@
+import { myInArray } from '../utils/helpers';
+
 export default class RecipeListAdapter {
   constructor(recipes) {
     this.recipes = recipes;
@@ -12,15 +14,15 @@ export default class RecipeListAdapter {
     const listId = [];
     const list = [];
 
-    this.recipes.forEach((recipe) => {
+    for (const recipe of this.recipes) {
       const keyLabel = Object.keys(recipe)[0];
       const recipeObject = recipe[keyLabel];
 
-      if (!listId.includes(recipeObject.id)) {
+      if (!myInArray(listId, recipeObject.id)) {
         listId.push(recipeObject.id);
         list.push(recipe);
       }
-    });
+    }
 
     return list;
   }

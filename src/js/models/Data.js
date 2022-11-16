@@ -6,9 +6,9 @@ export default class Data {
   get byName() {
     const list = [];
 
-    this.data.forEach((recipe) => {
+    for (const recipe of this.data) {
       list.push({ [recipe.name.toLowerCase()]: recipe });
-    });
+    }
 
     return list;
   }
@@ -16,11 +16,11 @@ export default class Data {
   get byIngredient() {
     const list = [];
 
-    this.data.forEach((recipe) => {
-      recipe.ingredients.forEach((ingredient) => {
+    for (const recipe of this.data) {
+      for (const ingredient of recipe.ingredients) {
         list.push({ [ingredient.ingredient.toLowerCase()]: recipe });
-      });
-    });
+      }
+    }
 
     return list;
   }
@@ -28,9 +28,9 @@ export default class Data {
   get byAppliance() {
     const list = [];
 
-    this.data.forEach((recipe) => {
+    for (const recipe of this.data) {
       list.push({ [recipe.appliance.toLowerCase()]: recipe });
-    });
+    }
 
     return list;
   }
@@ -38,11 +38,11 @@ export default class Data {
   get byUstensil() {
     const list = [];
 
-    this.data.forEach((recipe) => {
-      recipe.ustensils.forEach(((ustensil) => {
+    for (const recipe of this.data) {
+      for (const ustensil of recipe.ustensils) {
         list.push({ [ustensil.toLowerCase()]: recipe });
-      }));
-    });
+      }
+    }
 
     return list;
   }
@@ -50,9 +50,9 @@ export default class Data {
   get byDescription() {
     const list = [];
 
-    this.data.forEach((recipe) => {
+    for (const recipe of this.data) {
       list.push({ [recipe.description.toLowerCase()]: recipe });
-    });
+    }
 
     return list;
   }

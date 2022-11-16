@@ -28,10 +28,10 @@ export default class SearchForm {
     const singleRecipesList = recipesAdapter.getSingleElements();
 
     if (singleRecipesList.length) {
-      singleRecipesList.forEach((Recipe) => {
+      for (const Recipe of singleRecipesList) {
         const Template = new RecipeCard(Recipe);
         this.recipesWrapper.appendChild(Template.createRecipeCard());
-      });
+      }
     } else {
       this.recipesWrapper.innerHTML = EmptyResult();
     }

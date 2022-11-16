@@ -46,9 +46,9 @@ export default class Recipe {
 
   get ingredientsName() {
     const names = [];
-    this.recipe_ingredients.forEach((element) => {
+    for (const element of this.recipe_ingredients) {
       names.push(element.ingredient);
-    });
+    }
     return names;
   }
 }

@@ -10,12 +10,18 @@ export default class RecipeCard {
     return this.recipe;
   }
 
-  ingredientFormatter(ingredient) {
-    return `
-      <li>
-        <strong>${ingredient.ingredient}</strong> 
-        ${ingredient.hasOwnProperty('quantity') ? ` : ${ingredient.quantity}` : ''} ${ingredient.hasOwnProperty('unit') ? ingredient.unit : ''}
-      </li>`;
+  ingredientFormatter(ingredients) {
+    let DOMIngredients = '';
+
+    for (const ingredient of ingredients) {
+      DOMIngredients += `
+        <li>
+          <strong>${ingredient.ingredient}</strong> 
+          ${ingredient.hasOwnProperty('quantity') ? ` : ${ingredient.quantity}` : ''} ${ingredient.hasOwnProperty('unit') ? ingredient.unit : ''}
+        </li>`;
+    }
+
+    return DOMIngredients;
   }
 
   createRecipeCard() {
@@ -35,7 +41,7 @@ export default class RecipeCard {
         <div class="row mt-3">
           <div class="col-6">
             <ul class="card-ingredients">
-              ${recipe.ingredients.map(this.ingredientFormatter).join('')}
+              ${this.ingredientFormatter(recipe.ingredients)}
             </ul>
           </div>
           <div class="col-6">

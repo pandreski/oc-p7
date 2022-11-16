@@ -1,3 +1,4 @@
+import { myIncludes } from '../utils/helpers';
 import Search from './Search';
 
 export default class RecipeQuerySearch extends Search {
@@ -11,11 +12,11 @@ export default class RecipeQuerySearch extends Search {
   filterRecipes(query) {
     let res = [];
 
-    this.Recipes.forEach((recipe) => {
-      if (Object.keys(recipe)[0].includes(query.toLowerCase())) {
+    for (const recipe of this.Recipes) {
+      if (myIncludes(Object.keys(recipe)[0], query.toLowerCase())) {
         res = [...res, recipe];
       }
-    });
+    }
 
     return res;
   }

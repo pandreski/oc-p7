@@ -11,11 +11,11 @@ export default class RecipeCategorySearch extends Search {
   filterRecipes(query) {
     let res = [];
 
-    this.Recipes.forEach((recipe) => {
+    for (const recipe of this.Recipes) {
       if (Object.keys(recipe)[0] === query.toLowerCase()) {
         res = [...res, recipe];
       }
-    });
+    }
 
     return res;
   }

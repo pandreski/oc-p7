@@ -30,14 +30,15 @@ class App {
   }
 
   main() {
+    const recipesByName = Object.values(this.recipesData.byName);
+
     this.initSearchForm();
     this.initFilters();
 
-    // Populate default listing before any sorting
-    this.recipesData.byName.forEach((recipe) => {
-      const Template = new RecipeCard(recipe);
+    for (let i = 0; i < recipesByName.length; i++) {
+      const Template = new RecipeCard(recipesByName[i]);
       this.recipesWrapper.appendChild(Template.createRecipeCard());
-    });
+    }
   }
 }
 

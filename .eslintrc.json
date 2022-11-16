@@ -11,5 +11,8 @@
         "sourceType": "module"
     },
     "rules": {
+      "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+      "no-restricted-syntax": ["error", "BinaryExpression[operator='in']"],
+      "no-continue": []
     }
 }

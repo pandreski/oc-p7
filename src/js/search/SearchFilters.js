@@ -6,7 +6,7 @@ import RecipeCard from '../templates/RecipeCard';
 import EmptyResult from '../templates/EmptyResult';
 import Recipe from '../models/Recipe';
 import FilterCategorySearch from './FilterCategorySearch';
-import { upperCaseList, lowerCaseList, getUniqueElements } from '../utils/helpers';
+import { upperCaseList, lowerCaseList, getUniqueElements, myInArray } from '../utils/helpers';
 
 export default class SearchFilters {
   constructor(Recipes) {
@@ -84,7 +84,7 @@ export default class SearchFilters {
    * Initialize default data values & dropdown event listeners.
    */
   initSearchDropdown() {
-    this.dropdownElements.forEach((dropdown) => {
+    for (const dropdown of this.dropdownElements) {
       const searchDropdown = new SearchDropdown(dropdown);
       const identifier = dropdown.getAttribute('data-identifier');
       const input = dropdown.querySelector('input');
@@ -120,7 +120,7 @@ export default class SearchFilters {
         input.removeEventListener('keydown', this.handleFilterKeydown);
         input.removeEventListener('input', (e) => this.handleFilterInput(e));
       });
-    });
+    }
   }
 
   /**
@@ -131,7 +131,7 @@ export default class SearchFilters {
   updateRemainingFilters(remainingRecipes) {
     this.resetRemainingFilters();
 
-    remainingRecipes.forEach((recipe) => {
+    for (const recipe of remainingRecipes) {
       const keyLabel = Object.keys(recipe)[0];
       const RecipeObj = new Recipe(recipe[keyLabel]);
 
@@ -142,36 +142,36 @@ export default class SearchFilters {
       const activeAppliance = lowerCaseList(this.activeFilters.appliance);
       const activeUstensils = lowerCaseList(this.activeFilters.ustensils);
 
-      RecipeObj.ingredients.forEach((ingredient) => {
+      for (const ingredient of RecipeObj.ingredients) {
         if (
-          !this.remainingFilters.ingredients.includes(ingredient.ingredient.toLowerCase())
-          && !activeIngredients.includes(ingredient.ingredient.toLowerCase())
+          !myInArray(this.remainingFilters.ingredients, ingredient.ingredient.toLowerCase())
+          && !myInArray(activeIngredients, ingredient.ingredient.toLowerCase())
         ) {
           this.remainingFilters.ingredients.push(ingredient.ingredient.toLowerCase());
         }
-      });
+      }
 
       if (
-        !this.remainingFilters.appliance.includes(RecipeObj.appliance.toLowerCase())
-        && !activeAppliance.includes(RecipeObj.appliance.toLowerCase())
+        !myInArray(this.remainingFilters.appliance, RecipeObj.appliance.toLowerCase())
+        && !myInArray(activeAppliance, RecipeObj.appliance.toLowerCase())
       ) {
         this.remainingFilters.appliance.push(RecipeObj.appliance.toLowerCase());
       }
 
-      RecipeObj.ustensils.forEach((ustensil) => {
+      for (const ustensil of RecipeObj.ustensils) {
         if (
-          !this.remainingFilters.ustensils.includes(ustensil.toLowerCase())
-          && !activeUstensils.includes(ustensil.toLowerCase())
+          !myInArray(this.remainingFilters.ustensils, ustensil.toLowerCase())
+          && !myInArray(activeUstensils, ustensil.toLowerCase())
         ) {
           this.remainingFilters.ustensils.push(ustensil.toLowerCase());
         }
-      });
-    });
+      }
+    }
 
-    this.dropdownElements.forEach((dropdown) => {
+    for (const dropdown of this.dropdownElements) {
       const identifier = dropdown.getAttribute('data-identifier');
       this.updateList(upperCaseList(this.remainingFilters[identifier]), dropdown);
-    });
+    }
   }
 
   /**
@@ -203,14 +203,14 @@ export default class SearchFilters {
     const activeFiltersDictionary = Object.entries(this.activeFilters);
     const matchingFilters = []; // List of recipes having at least 1 matching filter
 
-    activeFiltersDictionary.forEach((elem) => {
+    for (let i = 0; i < activeFiltersDictionary.length; i++) {
       let QuerySearch;
 
-      if (!elem[1].length) {
-        return;
+      if (!activeFiltersDictionary[i][1].length) {
+        continue;
       }
 
-      switch (elem[0]) {
+      switch (activeFiltersDictionary[i][0]) {
         case 'ingredients':
           QuerySearch = new RecipeCategorySearch(this.Recipes.byIngredient);
           break;
@@ -225,14 +225,17 @@ export default class SearchFilters {
       }
 
       if (!QuerySearch) {
-        return;
+        continue;
       }
 
-      elem[1].forEach((query) => {
+      for (const query of activeFiltersDictionary[i][1]) {
         const queryResults = QuerySearch.search(query);
-        queryResults.forEach((res) => matchingFilters.push(res));
-      });
-    });
+
+        for (const res of queryResults) {
+          matchingFilters.push(res);
+        }
+      }
+    }
 
     const matchingRecipes = this.getMatchingRecipes(matchingFilters);
 
@@ -252,34 +255,46 @@ export default class SearchFilters {
   getMatchingRecipes(recipes) {
     const matchingRecipes = [];
 
-    recipes.forEach((recipe) => {
+    for (const recipe of recipes) {
       const keyLabel = Object.keys(recipe)[0];
       const RecipeObj = new Recipe(recipe[keyLabel]);
-      const recipeIngredients = RecipeObj.ingredientsName.map((elem) => elem.toLowerCase());
-      const recipeUstensils = RecipeObj.ustensils.map((elem) => elem.toLowerCase());
+      const recipeIngredients = lowerCaseList(RecipeObj.ingredientsName);
+      const recipeUstensils = lowerCaseList(RecipeObj.ustensils);
       let ingredientsMatching = true;
       let applianceMatching = true;
       let ustensilsMatching = true;
 
       if (this.activeFilters.ingredients.length) {
-        ingredientsMatching = this.activeFilters.ingredients
-          .every((elem) => recipeIngredients.includes(elem.toLowerCase()));
+        for (const elem of this.activeFilters.ingredients) {
+          if (!myInArray(recipeIngredients, elem.toLowerCase())) {
+            ingredientsMatching = false;
+            break;
+          }
+        }
       }
 
       if (this.activeFilters.appliance.length) {
-        applianceMatching = this.activeFilters.appliance
-          .every((elem) => RecipeObj.appliance.toLowerCase() === elem.toLowerCase());
+        for (const elem of this.activeFilters.appliance) {
+          if (RecipeObj.appliance.toLowerCase() !== elem.toLowerCase()) {
+            applianceMatching = false;
+            break;
+          }
+        }
       }
 
       if (this.activeFilters.ustensils.length) {
-        ustensilsMatching = this.activeFilters.ustensils
-          .every((elem) => recipeUstensils.includes(elem.toLowerCase()));
+        for (const elem of this.activeFilters.ustensils) {
+          if (!myInArray(recipeUstensils, elem.toLowerCase())) {
+            ustensilsMatching = false;
+            break;
+          }
+        }
       }
 
       if (ingredientsMatching && applianceMatching && ustensilsMatching) {
         matchingRecipes.push(recipe);
       }
-    });
+    }
 
     return matchingRecipes;
   }
@@ -298,10 +313,10 @@ export default class SearchFilters {
     this.updateRemainingFilters(singleRecipesList);
 
     if (singleRecipesList.length) {
-      singleRecipesList.forEach((elem) => {
+      for (const elem of singleRecipesList) {
         const Template = new RecipeCard(elem);
         this.recipesWrapper.appendChild(Template.createRecipeCard());
-      });
+      }
     } else {
       this.recipesWrapper.innerHTML = EmptyResult();
     }
@@ -321,12 +336,16 @@ export default class SearchFilters {
    * @param {Node} dropdown   Dropdown element
    */
   updateList(data, dropdown) {
-    const dataDom = data.map((option) => `<li class="col-md-4 item"><button>${option}</button></li>`).join('');
+    let dataDom = '';
     const listWrapper = dropdown.querySelector('.items-list');
     const identifier = dropdown.getAttribute('data-identifier');
 
+    for (const option of data) {
+      dataDom += `<li class="col-md-4 item"><button>${option}</button></li>`;
+    }
+
     listWrapper.innerHTML = dataDom;
-    listWrapper.querySelectorAll('.item button').forEach((elem) => {
+    for (const elem of listWrapper.querySelectorAll('.item button')) {
       elem.addEventListener('click', (e) => {
         const tag = new Tag(e.target.innerText, identifier);
         const tagDOM = tag.create();
@@ -338,7 +357,7 @@ export default class SearchFilters {
         tagDOM.querySelector('.delete').addEventListener('click', this.onTagDelete.bind(that));
         that.tagWrapper.append(tagDOM);
       });
-    });
+    }
   }
 
   /**

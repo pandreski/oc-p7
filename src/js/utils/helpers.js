@@ -5,7 +5,13 @@
  * @returns {Array}     Array of string elements
  */
 export function upperCaseList(list) {
-  return list.map((elem) => elem.charAt(0).toUpperCase() + elem.slice(1));
+  const data = [];
+
+  for (const elem of list) {
+    data.push(elem.charAt(0).toUpperCase() + elem.slice(1));
+  }
+
+  return data;
 }
 
 /**
@@ -15,7 +21,13 @@ export function upperCaseList(list) {
  * @returns {Array}     Array of string elements
  */
 export function lowerCaseList(list) {
-  return list.map((elem) => elem.toLowerCase());
+  const data = [];
+
+  for (const elem of list) {
+    data.push(elem.toLowerCase());
+  }
+
+  return data;
 }
 
 /**
@@ -26,8 +38,60 @@ export function lowerCaseList(list) {
 * @returns {Array}      Array of single key elements
 */
 export function getUniqueElements(list) {
-  let uniqueData = list.map((elem) => Object.keys(elem)[0]);
+  let uniqueData = [];
+
+  for (const elem of list) {
+    uniqueData.push(Object.keys(elem)[0]);
+  }
+
   uniqueData = [...new Set(uniqueData)];
   uniqueData = upperCaseList(uniqueData);
   return uniqueData;
+}
+
+/**
+ * Custom function to search an element into an array.
+ * Returns true if `searchElement` as been found in `data`, false either.
+ *
+ * @param {Array} data          An array to search in
+ * @param {Any} searchElement   The element to search for
+ * @returns {Boolean}
+ */
+export function myInArray(data, searchElement) {
+  for (let i = 0; i < data.length; i++) {
+    if (data[i] === searchElement) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+/**
+ * Custom function to search an element into a string.
+ * Returns true if `searchElement` as been found in `data`, false either.
+ *
+ * @param {String} data           A string to search in
+ * @param {String} searchElement  The element to search for
+ * @returns {Boolean}
+ */
+export function myIncludes(data, searchElement) {
+  let match = 0;
+
+  for (let j = 0; j < data.length; j++) {
+    if (data[j] === searchElement[0]) {
+      for (let k = 0; k < searchElement.length; k++) {
+        if (searchElement[k] === data[j + k]) {
+          match += 1;
+        }
+      }
+
+      if (match === searchElement.length) {
+        return true;
+      }
+
+      match = 0;
+    }
+  }
+  return false;
 }
