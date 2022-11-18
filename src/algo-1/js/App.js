@@ -29,15 +29,14 @@ class App {
   }
 
   main() {
-    const recipesByName = Object.values(this.recipesData.byName);
-
     this.initSearchForm();
     this.initFilters();
 
-    for (let i = 0; i < recipesByName.length; i++) {
-      const Template = new RecipeCard(recipesByName[i]);
+    // Populate default listing before any sorting
+    this.recipesData.byName.forEach((recipe) => {
+      const Template = new RecipeCard(recipe);
       this.recipesWrapper.appendChild(Template.createRecipeCard());
-    }
+    });
   }
 }
 
