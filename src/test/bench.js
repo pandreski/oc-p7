@@ -1,31 +1,21 @@
 const Benchmark = require('benchmark');
 const suite = new Benchmark.Suite('Search algorithms benchmark');
-const App1 = '../algo-1/App.js';
-const App2 = '../algo-2/App.js';
-const recipes = '../../../data/recipes';
+const { Algo1 } = require('../algo-1/js/App.js');
+const { Algo2 } = require('../algo-2/js/App.js');
 const query = 'coco';
 
 suite
   .add('Algo 1', function() {
-    import(App1).then(module => {
-      const _app = new module.App(recipes);
-      _app.main();
-      document.getElementById('main-search-input').value = query;
-    });
+    Algo1(query);
   })
   .add('Algo 2', function() {
-    import(App2).then(module => {
-      const _app = new module.App(recipes);
-      _app.main();
-      document.getElementById('main-search-input').value = query;
-    });
+    Algo2(query);
   })
   .on('start', function() {
     console.log('Test suite started');
   })
   .on('cycle', function(event) {
     console.log(String(event.target));
-    console.log(event);
   })
   .on('complete', function() {
     console.log('Test completed');

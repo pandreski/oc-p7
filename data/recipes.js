@@ -1,4 +1,4 @@
-export const recipes = [
+const data = [
   {
       "id": 1,
       "name" : "Limonade de Coco",
@@ -1723,4 +1723,6 @@ export const recipes = [
       "appliance": "Four",
       "ustensils":["rouleau à patisserie","fouet"]
   }
-]
+];
+
+module.exports = { data };

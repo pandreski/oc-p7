@@ -1,44 +1,60 @@
-import * as bootstrap from 'bootstrap';
-import { recipes } from '../../data/recipes';
-import RecipeCard from './templates/RecipeCard';
-import Data from './models/Data';
-import SearchForm from './search/SearchForm';
-import SearchFilters from './search/SearchFilters';
+const { data } = require('../../../data/recipes');
+let globalDataList;
 
-class App {
-  constructor(data) {
-    this.recipes = [];
-    this.recipesWrapper = document.querySelector('.recipes-listing');
-    this.recipesData = new Data(data);
-  }
+module.exports = {
+  Algo1,
+};
 
-  initSearchForm() {
-    // List of data including name, ingredients and description for main search form
-    const globalDataList = [
-      ...this.recipesData.byName,
-      ...this.recipesData.byIngredient,
-      ...this.recipesData.byDescription];
+function byName() {
+  const list = [];
 
-    const Search = new SearchForm(globalDataList, this.recipesData);
-    Search.render();
-  }
+  data.forEach((recipe) => {
+    list.push({ [recipe.name.toLowerCase()]: recipe });
+  });
 
-  initFilters() {
-    const Filters = new SearchFilters(this.recipesData);
-    Filters.render();
-  }
-
-  main() {
-    this.initSearchForm();
-    this.initFilters();
-
-    // Populate default listing before any sorting
-    this.recipesData.byName.forEach((recipe) => {
-      const Template = new RecipeCard(recipe);
-      this.recipesWrapper.appendChild(Template.createRecipeCard());
-    });
-  }
+  return list;
 }
 
-const recipesApp = new App(recipes);
-recipesApp.main();
+function byIngredient() {
+  const list = [];
+
+  data.forEach((recipe) => {
+    recipe.ingredients.forEach((ingredient) => {
+      list.push({ [ingredient.ingredient.toLowerCase()]: recipe });
+    });
+  });
+
+  return list;
+}
+
+function byDescription() {
+  const list = [];
+
+  data.forEach((recipe) => {
+    list.push({ [recipe.description.toLowerCase()]: recipe });
+  });
+
+  return list;
+}
+
+function filterRecipes(query) {
+  let res = [];
+
+  globalDataList.forEach((recipe) => {
+    if (Object.keys(recipe)[0].includes(query.toLowerCase())) {
+      res = [...res, recipe];
+    }
+  });
+
+  return res;
+}
+
+function Algo1(query) {
+  globalDataList = [
+    ...byName(),
+    ...byIngredient(),
+    ...byDescription()
+  ];
+  
+  const results = filterRecipes(query);
+}

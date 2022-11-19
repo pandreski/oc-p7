@@ -6,20 +6,12 @@ Requirements:
 - NodeJS 16+
 - Yarn 1.22+
 
-## Development
+## Benchmark
 
-This project is based on [Vite.js](https://vitejs.dev/) v3 for local development.
+This project uses the last version of [benchmark.js](https://github.com/bestiejs/benchmark.js)
 
-### Local development
+1. Install local dependencies with `yarn install`,
+2. Run `node src/test/bench.js` to execute the benchmark.js script,
+3. Wait and see which algorithm is the fastest between `src/algo-1/js/App.js` and `src/algo-2/js/App.js`.
 
-Install dev dependencies with `yarn install` and run local server with `yarn dev`. 
-
-Then, visit [http://127.0.0.1:4200/oc-p7/](http://127.0.0.1:4200/oc-p7/)
-
-### Build sources
-
-To build sources for production, run `yarn build` command.
-
-All assets and code will be optimized and compiled in `/docs` folder regarding to the github pages recommendations.
-
-When pushed/merged to the `main` branch, the project is available on [https://pandreski.github.io/oc-p7/](https://pandreski.github.io/oc-p7/).
+Edit `src/test/bench.js` to configure the benchmark rules and/or change the search query string (`const query = ...`).
