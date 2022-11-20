@@ -37,60 +37,69 @@
               <div class="tags mt-4"></div>
 
               <div class="secondary-filters--wrapper d-inline-flex flex-wrap">
-                <div class="dropdown" data-identifier="ingredients">
-                  <button type="button" 
-                    class="btn btn-primary text-light py-3 dropdown-toggle text-start" 
-                    data-bs-auto-close="outside" 
-                    data-bs-toggle="dropdown" 
-                    aria-expanded="false" 
-                    data-bs-offset="0,0">
+                <div class="dropdown btn-group" data-identifier="ingredients">
+                  <div class="bg-primary text-light px-3 py-3 dd-btn-label-wrapper">
                     <span class="button-label">Ingrédients</span>
                     <form id="dropdown-search-ingredients" class="d-none">
                       <label class="visually-hidden" for="search-ingredients-input">Rechercher un ingrédient</label>
                       <input type="text" id="search-ingredients-input" name="search-ingredients-input" placeholder="Rechercher un ingrédient">
                     </form>
+                  </div>
+                  <button type="button"
+                    class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                    data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside"
+                    data-bs-offset="0,0"
+                    aria-expanded="false">
+                    <span class="visually-hidden">Ouvrir le menu</span>
                   </button>
-                  <div class="dropdown-menu text-bg-primary text-light">
+                  <div class="dropdown-menu text-bg-primary text-light dropdown-menu-end">
                     <div class="container">
                       <ul class="row items-list"></ul>
                     </div>
                   </div>
                 </div>
 
-                <div class="dropdown" data-identifier="appliance">
-                  <button type="button" 
-                    class="btn btn-secondary text-light py-3 dropdown-toggle text-start" 
-                    data-bs-auto-close="outside" 
-                    data-bs-toggle="dropdown" 
-                    aria-expanded="false" 
-                    data-bs-offset="0,0">
+                <div class="dropdown btn-group" data-identifier="appliance">
+                  <div class="bg-secondary text-light px-3 py-3 dd-btn-label-wrapper">
                     <span class="button-label">Appareils</span>
                     <form id="dropdown-search-appliance" class="d-none">
                       <label class="visually-hidden" for="search-appliance-input">Rechercher un appareil</label>
                       <input type="text" id="search-appliance-input" name="search-appliance-input" placeholder="Rechercher un appareil">
                     </form>
+                  </div>
+                  <button type="button"
+                    class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
+                    data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside"
+                    data-bs-offset="0,0"
+                    aria-expanded="false">
+                    <span class="visually-hidden">Ouvrir le menu</span>
                   </button>
-                  <div class="dropdown-menu text-bg-secondary text-light">
+                  <div class="dropdown-menu text-bg-secondary text-light dropdown-menu-end">
                     <div class="container">
                       <ul class="row items-list"></ul>
                     </div>
                   </div>
                 </div>
 
-                <div class="dropdown" data-identifier="ustensils">
-                  <button type="button" 
-                    class="btn btn-tertiary text-light py-3 dropdown-toggle text-start" 
-                    data-bs-auto-close="outside"
-                    data-bs-toggle="dropdown" 
-                    aria-expanded="false" 
-                    data-bs-offset="0,0">
+                <div class="dropdown btn-group" data-identifier="ustensils">
+                  <div class="bg-tertiary text-light px-3 py-3 dd-btn-label-wrapper">
                     <span class="button-label">Ustensiles</span>
                     <form id="dropdown-search-ustensils" class="d-none">
                       <label class="visually-hidden" for="search-ustensils-input">Rechercher un ustensile</label>
                       <input type="text" id="search-ustensils-input" name="search-ustensils-input" placeholder="Rechercher un ustensile">
                     </form>
+                  </div>
+                  <button type="button"
+                    class="btn btn-tertiary dropdown-toggle dropdown-toggle-split"
+                    data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside"
+                    data-bs-offset="0,0"
+                    aria-expanded="false">
+                    <span class="visually-hidden">Ouvrir le menu</span>
                   </button>
-                  <div class="dropdown-menu text-bg-tertiary text-light">
+                  <div class="dropdown-menu text-bg-tertiary text-light dropdown-menu-end">
                     <div class="container">
                       <ul class="row items-list"></ul>
                     </div>

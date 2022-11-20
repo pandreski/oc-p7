@@ -7,11 +7,23 @@ $btn-colors: (
 .dropdown {
   margin-right: 1.25em;
   margin-top: 1em;
+  position: relative;
+
+  .dd-btn-label-wrapper {
+    flex: 1 0 auto;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+
+    &.open {
+      border-bottom-left-radius: 0;
+    }
+  }
 
   .dropdown-toggle {
     position: relative;
-    padding-right: 60px;
     border: none;
+    width: 50px;
+    float: right;
     
     &::after {
       content: '';
