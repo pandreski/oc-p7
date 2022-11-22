@@ -5,10 +5,10 @@ const { Algo2 } = require('../algo-2/js/App.js');
 const query = 'coco';
 
 suite
-  .add('Algo 1', function() {
+  .add('Algo 1 - Array functions', function() {
     Algo1(query);
   })
-  .add('Algo 2', function() {
+  .add('Algo 2 - Classic custom functions', function() {
     Algo2(query);
   })
   .on('start', function() {
