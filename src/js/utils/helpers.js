@@ -31,3 +31,13 @@ export function getUniqueElements(list) {
   uniqueData = upperCaseList(uniqueData);
   return uniqueData;
 }
+
+/**
+ * Indicates if there is a main search processing.
+ *
+ * @returns {Boolean}
+ */
+export function hasMainSearchProcessing() {
+  const mainInput = document.getElementById('main-search-input');
+  return !!mainInput.value.length;
+}

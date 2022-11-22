@@ -6,7 +6,7 @@ import RecipeCard from '../templates/RecipeCard';
 import EmptyResult from '../templates/EmptyResult';
 import Recipe from '../models/Recipe';
 import FilterCategorySearch from './FilterCategorySearch';
-import { upperCaseList, lowerCaseList, getUniqueElements } from '../utils/helpers';
+import { upperCaseList, lowerCaseList, getUniqueElements, hasMainSearchProcessing } from '../utils/helpers';
 
 export default class SearchFilters {
   constructor(Recipes) {
@@ -123,8 +123,10 @@ export default class SearchFilters {
       dropdown.addEventListener('hide.bs.dropdown', () => {
         searchDropdown.handleHide();
         input.value = '';
-        // reset list choices
-        this.updateList(upperCaseList(this.remainingFilters[identifier]), dropdown);
+        // reset list choices if no processing in main search
+        if (!hasMainSearchProcessing()) {
+          this.updateList(upperCaseList(this.remainingFilters[identifier]), dropdown);
+        }
         input.removeEventListener('keydown', this.handleFilterKeydown);
         input.removeEventListener('input', (e) => this.handleFilterInput(e));
       });
