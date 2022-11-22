@@ -6,7 +6,7 @@ import RecipeCard from '../templates/RecipeCard';
 import EmptyResult from '../templates/EmptyResult';
 import Recipe from '../models/Recipe';
 import FilterCategorySearch from './FilterCategorySearch';
-import { upperCaseList, lowerCaseList, getUniqueElements, myInArray } from '../utils/helpers';
+import { upperCaseList, lowerCaseList, getUniqueElements, myInArray, hasMainSearchProcessing } from '../utils/helpers';
 
 export default class SearchFilters {
   constructor(Recipes) {
@@ -123,8 +123,10 @@ export default class SearchFilters {
       dropdown.addEventListener('hide.bs.dropdown', () => {
         searchDropdown.handleHide();
         input.value = '';
-        // reset list choices
-        this.updateList(upperCaseList(this.remainingFilters[identifier]), dropdown);
+        // reset list choices if no processing in main search
+        if (!hasMainSearchProcessing()) {
+          this.updateList(upperCaseList(this.remainingFilters[identifier]), dropdown);
+        }
         input.removeEventListener('keydown', this.handleFilterKeydown);
         input.removeEventListener('input', (e) => this.handleFilterInput(e));
       });
@@ -200,8 +202,14 @@ export default class SearchFilters {
    * @param {*} category    Filter's category
    */
   removeActiveFilter(filterName, category) {
-    const index = this.activeFilters[category].findIndex((elem) => elem === filterName);
-    this.activeFilters[category].splice(index, 1);
+    const list = [];
+
+    for (const elem of this.activeFilters[category]) {
+      if (elem !== filterName) {
+        list.push(elem);
+      }
+    }
+    this.activeFilters[category] = list;
   }
 
   /**

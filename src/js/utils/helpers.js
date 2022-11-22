@@ -50,6 +50,16 @@ export function getUniqueElements(list) {
 }
 
 /**
+ * Indicates if there is a main search processing.
+ *
+ * @returns {Boolean}
+ */
+ export function hasMainSearchProcessing() {
+  const mainInput = document.getElementById('main-search-input');
+  return !!mainInput.value.length;
+}
+
+/**
  * Custom function to search an element into an array.
  * Returns true if `searchElement` as been found in `data`, false either.
  *
