@@ -15,6 +15,7 @@ export default class SearchDropdown {
     this.buttonLabel.classList.add('d-none');
     this.form.classList.remove('d-none');
     this.input.focus();
+    this.input.addEventListener('click', (e) => e.stopPropagation());
   }
 
   // Reset button width
