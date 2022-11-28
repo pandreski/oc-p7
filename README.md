@@ -14,7 +14,7 @@ Contains the most powerful algorithm code regarding to the performance benchmark
 ### algo-1
 Contains algorithm based on JS [Array functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array).
 
-### alg-2
+### algo-2
 Contains algorithm based on JS native loops functions like `for`, `while`.
 
 ### benchmark
